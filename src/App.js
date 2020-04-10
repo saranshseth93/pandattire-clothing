@@ -7,7 +7,7 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 
 import HomePage from './pages/homepage/homepage.component';
 
-import {auth} from './firebase/firebas.utils';
+import {auth, createUserProfileDocument} from './firebase/firebas.utils';
 
 
 class App extends React.Component {
@@ -23,8 +23,9 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
     componentDidMount(){
-      auth.onAuthStateChanged(user => {
-        this.setState({currentUser: user});
+      auth.onAuthStateChanged(async user => {
+        // this.setState({currentUser: user});
+        createUserProfileDocument(user);
 
         console.log(user);
       });
